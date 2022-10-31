@@ -57,13 +57,17 @@ LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars
 
 
 void handleRoot() {
-  server.send(200, "text/html", theHtmlCode);
+//  server.send(200, "text/html", theHtmlCode);
+server.send(200, "text/html", theHtmlCode);
 }
 
 void handleWaterLevel(){
-  server.send(200, "text/plain",String(distanceCm) );
+  server.send(200, "text/plain", String(distanceCm) );
 }
 
+void dashboard(){
+  server.send(200, "text/html", theHtmlCode);
+}
 
 void waterlevels(){
     digitalWrite(trigPin, LOW);
@@ -158,6 +162,7 @@ void setup(void) {
     server.on("/manStart", manStart);
     server.on("/manStop", manStop);
     server.on("/theWaterLevel", handleWaterLevel);
+    server.on("/dashboard", dashboard);
 //    });
 
   server.onNotFound(handleNotFound);
