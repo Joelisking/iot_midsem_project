@@ -1,4 +1,5 @@
-#IoT Midsem Project
+ # IoT Midsem Project
+
 All codes used for iot midsem project by Joel Adu-Kwarteng and Papa Aferi.
 
 ultrasonic_lcd is the first piece of code we used to display values read by the ultrasonic sensor on the lcd.
