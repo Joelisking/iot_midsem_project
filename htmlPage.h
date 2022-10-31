@@ -12,13 +12,24 @@ char theHtmlCode[] PROGMEM = R"(
         <h1>Water Level Monitoring</h1>
     </div>
         <h2 style="text-align: center;">Current Water Level:</h2>
-        <p id="waterLevels" style="text-align: center; background-color:turquoise; padding:10px;">\</p>
+        <p id="waterLevels" style="text-align: center; background-color:turquoise; padding:10px;"></p>
     <div>
         <h2 style="text-align: center">Motor Controller</h2>
-        <div>
-          <button id='Auto' onclick='manStart(id)'> Start Manually </button>
-          <button id='Man Start' onclick='manStop(id)'> Stop Manually </button>
-          <button id='Man Stop' onclick='autoMode(id)'> Auto Mode </button>
+
+        <div class="text-center" style="align-items: center;">
+          <button id='Auto' onclick='manStart()' class="btn btn-primary"> Start Manually </button>
+          <button id='Man Start' onclick='manStop()' class="btn btn-success"> Stop Manually </button>
+          <button id='Man Stop' onclick='autoMode()' class="btn btn-warning"> Auto Mode </button>
+         </div>
+
+     <div>
+        <h2 style="text-align: center">Water Level Report</h2>
+        <div style="align-items: center;" class="d-flex justify-content-center">
+            <a href="http://localhost/iot/report.php" target="_blank">
+                <button class="btn btn-danger" id='Report'> View Report </button>
+            </a>
+        </div>
+    </div>
      
 
     <script>
@@ -28,38 +39,24 @@ char theHtmlCode[] PROGMEM = R"(
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("waterLevels").innerHTML = this.responseText;
+          document.getElementById("waterLevels").innerHTML = this.responseText;
         }
       };
        xhr.open('GET', "theWaterLevel", true);
        xhr.send();
     }
 
-//    function manStart(){
-//      var xhr = new XMLHttpRequest();
-//      xhr.onreadystatechange = function() {};
-//      xhr.open("GET", "manStart", true);
-//      xhr.send();
-//    }
-
-      function autoStart(butn) {
-         var URL, variab, text;
-         if (butn == 'AutoStart') {
-            URL = 'AutoStart';
-         }
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function (butn) {
-                if (this.readyState == 4 && this.status == 200)
-                    document.getElementById(variab).innerHTML = this.
-                        responseText;
-            };
-            xhr.open('GET', URL, true);
-            xhr.send();
+    function manStart(){
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {};
+      xhr.open("GET", "manStart", true);
+      xhr.send();
+    }
 
     function manStop(){
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {};
-      if (this.readyState == 4 && this.status == 200) {}
+    //   if (this.readyState == 4 && this.status == 200) {}
       xhr.open("GET", "manStop", true);
       xhr.send();
     }
@@ -74,45 +71,4 @@ char theHtmlCode[] PROGMEM = R"(
 
     </body>
 </html>
-
-
-
-<!-- 
-
-
-        function sendData(butn) {
-            var URL, variab, text;
-            if (butn == 'light') {
-                URL = 'AutoURL';
-                variab = 'light';
-            }
-            else if (butn == 'Manual') {
-                URL = 'ManualURL';
-                variab = 'Manual';
-            }
-            if (butn == 'light' || butn == 'Manual') { // change button class and text 
-                var state = document.getElementById(butn).className;
-                state = (state == 'btn on' ? 'btn off' : 'btn on');
-                text = (state == 'btn on' ? ' OFF' : ' ON');
-                document.getElementById(butn).className = state;
-                document.getElementById(butn).innerHTML = text;
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function (butn) {
-            if (this.readyState == 4 && this.status == 200)
-                document.getElementById(variab).innerHTML = this.
-                esponseText;
-            };
-            xhr.open('GET', URL, true);
-            xhr.send();
-        }
-    </script>
-
-
- -->
-
-
-
-
-
 )";
